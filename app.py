@@ -4,7 +4,7 @@ from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 # try appliaction
 application = Flask(__name__)
-
+app = application
 
 application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
