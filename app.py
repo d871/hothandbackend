@@ -4,10 +4,10 @@ from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 # try appliaction
 application = Flask(__name__)
-app = application
 
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
+
+application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
 
 db = SQLAlchemy(app)
 password = "2@asfizkg4fas?r"
@@ -28,7 +28,7 @@ class HotHandDatabase(db.Model):
     date_created = db.Column(db.DateTime, default=datetime.now)
 
 
-@app.route('/', methods=['POST', 'GET'])
+@application.route('/', methods=['POST', 'GET'])
 def mojefunkce():
     if request.method == 'POST':
         if request.json["password"] == password:
@@ -62,5 +62,5 @@ def mojefunkce():
         return{"status": "ok"}
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
