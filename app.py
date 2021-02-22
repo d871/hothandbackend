@@ -27,34 +27,38 @@ class HotHandDatabase(db.Model):
     date_created = db.Column(db.DateTime, default=datetime.now)
 
 
-@app.route('/', methods=['POST'])
+@app.route('/', methods=['POST', 'GET'])
 def mojefunkce():
-    if request.json["password"] == password:
-        print("password was cool")
-        req = request.json
-        hot = HotHandDatabase(
-            l_pressed=str(req["l_pressed"]),
-            r_pressed=str(req["r_pressed"]),
-            u_pressed=str(req["u_pressed"]),
-            d_pressed=str(req["d_pressed"]),
-            l_top=str(req["l_top"]),
-            r_top=str(req["r_top"]),
-            u_top=str(req["u_top"]),
-            d_top=str(req["d_top"]),
-            score=str(req["score"]),
-            settings=str(req["settings"])
-        )
-        db.session.add(hot)
-        db.session.commit()
-        return {"status": "ok"}
-    # print(request.json)
-    # print(type(request.json))
-    # print(request.json["l_pressed"])
-    # user = User(first=str(request.json), second="nic")
-    # db.session.add(user)
-    # db.session.commit()
+    if request.method == 'POST':
+        if request.json["password"] == password:
+            print("password was cool")
+            req = request.json
+            hot = HotHandDatabase(
+                l_pressed=str(req["l_pressed"]),
+                r_pressed=str(req["r_pressed"]),
+                u_pressed=str(req["u_pressed"]),
+                d_pressed=str(req["d_pressed"]),
+                l_top=str(req["l_top"]),
+                r_top=str(req["r_top"]),
+                u_top=str(req["u_top"]),
+                d_top=str(req["d_top"]),
+                score=str(req["score"]),
+                settings=str(req["settings"])
+            )
+            db.session.add(hot)
+            db.session.commit()
+            return {"status": "ok"}
+        # print(request.json)
+        # print(type(request.json))
+        # print(request.json["l_pressed"])
+        # user = User(first=str(request.json), second="nic")
+        # db.session.add(user)
+        # db.session.commit()
+        else:
+            return {"status": "not ok"}
     else:
-        return {"status": "not ok"}
+        print("hello world")
+        return{"status": "ok"}
 
 
 if __name__ == '__main__':
