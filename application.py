@@ -57,9 +57,16 @@ def mojefunkce():
         # db.session.commit()
         else:
             return {"status": "not ok"}
+    elif request.method == 'GET':
+        # print("hello world")
+        # print (HotHandDatabase.query.all())
+        message = ""
+        for k in range(len(HotHandDatabase.query.all())):
+            message = message+"score: " + \
+                str(HotHandDatabase.query.all()[k].score)
+        return(message)
     else:
-        print("hello world")
-        return{"status": "ok"}
+        return{"status": "not ok"}
 
 
 if __name__ == '__main__':
